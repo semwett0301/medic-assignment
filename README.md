@@ -2,16 +2,6 @@
 
 A modern Angular application for client management with a clean, feature-based architecture. Built with Angular 19.2.0, featuring reactive state management, comprehensive validation, and extensive unit testing.
 
-## ✨ Features
-
-- **Client Management**: Create, read, update, and delete clients
-- **Real-time Search**: Search clients by first or last name
-- **Status Filtering**: Filter clients by active/inactive status
-- **Form Validation**: Comprehensive validation with custom date validators
-- **Responsive Design**: Mobile-first, modern UI components
-- **Reactive State**: Angular signals for efficient state management
-- **Unit Testing**: Comprehensive test coverage with Jest
-
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -51,43 +41,7 @@ src/
    └─ normalize.css             # CSS normalization
 ```
 
-### Architecture Principles
-
-#### 1. **Feature-Based Organization**
-- Each feature is self-contained with its own components, services, and models
-- Clear separation between smart (page) and dumb (presentational) components
-- Feature-specific routing and lazy loading
-
-#### 2. **Smart/Dumb Component Pattern**
-- **Smart Components (Pages)**: Handle state, business logic, and data fetching
-- **Dumb Components**: Pure presentational components with inputs/outputs only
-- Clear data flow from smart to dumb components
-
-#### 3. **Reactive State Management**
-- Angular signals for reactive state management
-- Computed signals for derived state
-- Service-based state management with clear APIs
-
-#### 4. **Reusable UI Components**
-- Shared UI component library in `shared/ui/`
-- Consistent design system across the application
-- Form integration with ControlValueAccessor
-
-#### 5. **Validation Strategy**
-- Custom validators for business logic (date validation)
-- Reactive form validation with real-time feedback
-- Centralized validation rules and error messages
-
 ## 🧪 Testing Strategy
-
-### Test Coverage
-
-The application includes comprehensive unit tests covering:
-
-- **Services**: Business logic, API interactions, state management
-- **Components**: UI behavior, form handling, user interactions
-- **Validators**: Custom validation logic and edge cases
-- **Utilities**: Helper functions and data transformations
 
 ### Test Structure
 
