@@ -1,7 +1,5 @@
 # Gerimedica Frontend Assignment
 
-A modern Angular application for client management with a clean, feature-based architecture. Built with Angular 19.2.0, featuring reactive state management, comprehensive validation, and extensive unit testing.
-
 ## 🏗️ Architecture
 
 ### Project Structure
