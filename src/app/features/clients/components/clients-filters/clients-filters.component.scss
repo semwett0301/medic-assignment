@@ -1,0 +1,50 @@
+.filter-section {
+  padding: 1.5rem;
+}
+
+.filter-section h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+
+.search-group {
+  flex: 1;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+
+@media (min-width: 768px) {
+  .filter-controls {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .search-group {
+    flex: 1;
+  }
+  
+  .filter-group {
+    flex: 0 0 auto;
+    min-width: 200px;
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "clients": [
+    {
+      "firstName": "First5",
+      "lastName": "Last2",
+      "birthdate": "1957-01-10",
+      "isActive": false,
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "firstName": "First3",
+      "lastName": "Last3",
+      "birthdate": "1968-12-03T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "4",
+      "firstName": "First4",
+      "lastName": "Last4",
+      "birthdate": "1980-01-03T00:00:00.000Z",
+      "isActive": false
+    },
+    {
+      "id": "5",
+      "firstName": "First5",
+      "lastName": "Last5",
+      "birthdate": "1990-01-03T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "6",
+      "firstName": "First6",
+      "lastName": "Last6",
+      "birthdate": "1995-01-03T00:00:00.000Z",
+      "isActive": false
+    },
+    {
+      "id": "7",
+      "firstName": "First7",
+      "lastName": "Last7",
+      "birthdate": "2000-01-03T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "8",
+      "firstName": "First8",
+      "lastName": "Last8",
+      "birthdate": "2005-01-03T00:00:00.000Z",
+      "isActive": false
+    },
+    {
+      "id": "d1f9",
+      "firstName": "Semen",
+      "lastName": "Mokrov",
+      "birthdate": "2002-01-03",
+      "isActive": true
+    },
+    {
+      "id": "4503",
+      "firstName": "Semen",
+      "lastName": "Mokrov",
+      "birthdate": "2002-02-03",
+      "isActive": true
+    }
+  ]
+}

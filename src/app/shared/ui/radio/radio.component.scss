@@ -1,0 +1,56 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-group.disabled {
+  opacity: 0.5;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-option:hover:not(.disabled) {
+  opacity: 0.8;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.radio-dot {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: #007bff;
+  transition: all 0.2s ease;
+}
+
+.radio-dot.checked {
+  width: 8px;
+  height: 8px;
+}
+
+.radio-label {
+  font-size: 14px;
+  color: #333;
+}

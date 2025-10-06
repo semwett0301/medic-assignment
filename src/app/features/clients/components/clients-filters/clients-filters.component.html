@@ -1,0 +1,28 @@
+<app-card>
+  <div class="filter-section">
+    <h2>Search & Filter</h2>
+    <div class="filter-controls">
+      <div class="search-group">
+        <app-input
+          id="search"
+          label="Search Clients"
+          placeholder="Search by first or last name..."
+          [value]="searchTerm"
+          (valueChange)="onSearchChange($event)">
+        </app-input>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Filter by Status:</label>
+        <app-radio
+          name="statusFilter"
+          [options]="statusFilterOptions"
+          [ngModel]="activeFilter"
+          (valueChange)="onFilterChange($event)"
+          variant="primary"
+          size="medium"
+          layout="horizontal">
+        </app-radio>
+      </div>
+    </div>
+  </div>
+</app-card>

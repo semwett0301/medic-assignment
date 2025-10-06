@@ -1,0 +1,44 @@
+<div class="clients-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1>Client Management</h1>
+    <p>Manage your client database with modern features</p>
+  </div>
+
+  <!-- Create Client Section -->
+  <app-client-form
+    [showForm]="showCreateForm()"
+    [form]="createForm"
+    [loading]="loading()"
+    [getFieldError]="getFieldError.bind(this)"
+    (toggleForm)="toggleCreateForm()"
+    (submitForm)="createClient()"
+    (resetForm)="resetCreateForm()">
+  </app-client-form>
+
+  <!-- Search and Filter Section -->
+  <app-clients-filters
+    [searchTerm]="searchTerm()"
+    [activeFilter]="activeFilter()"
+    (searchChange)="setSearchTerm($event)"
+    (filterChange)="setActiveFilter($event)">
+  </app-clients-filters>
+
+  <!-- Clients List Section -->
+  <app-clients-list
+    [clients]="filteredClients()"
+    [loading]="loading()"
+    [error]="error()"
+    [editingClientId]="editingClientId()"
+    [editForm]="editForm"
+    [getEditFieldError]="getEditFieldError.bind(this)"
+    [trackByClientId]="trackByClientId.bind(this)"
+    [formatDate]="formatDate.bind(this)"
+    [calculateAge]="calculateAge.bind(this)"
+    (startEdit)="startEdit($event)"
+    (saveEdit)="saveEdit($event)"
+    (cancelEdit)="cancelEdit()"
+    (deleteClient)="deleteClient($event)"
+    (retry)="loadClients()">
+  </app-clients-list>
+</div>

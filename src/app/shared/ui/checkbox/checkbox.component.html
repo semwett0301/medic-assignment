@@ -1,0 +1,66 @@
+<div class="checkbox-container" [class.disabled]="disabled">
+  <div class="checkbox-wrapper">
+    <input
+      [id]="id"
+      type="checkbox"
+      [checked]="value"
+      [disabled]="disabled"
+      [required]="required"
+      [indeterminate]="indeterminate"
+      (change)="onInputChange($event)"
+      (blur)="onInputBlur()"
+      (focus)="onInputFocus()"
+      class="checkbox-input"
+      [class.focused]="isFocused"
+      [class.checked]="value"
+      [class.indeterminate]="indeterminate"
+      [class.size-small]="size === 'small'"
+      [class.size-medium]="size === 'medium'"
+      [class.size-large]="size === 'large'"
+      [class.variant-default]="variant === 'default'"
+      [class.variant-primary]="variant === 'primary'"
+      [class.variant-success]="variant === 'success'"
+      [class.variant-warning]="variant === 'warning'"
+      [class.variant-danger]="variant === 'danger'">
+    
+    <label 
+      [for]="id" 
+      class="checkbox-label"
+      [class.disabled]="disabled"
+      (click)="onLabelClick()">
+      <span class="checkbox-custom" 
+            [class.checked]="value"
+            [class.indeterminate]="indeterminate"
+            [class.size-small]="size === 'small'"
+            [class.size-medium]="size === 'medium'"
+            [class.size-large]="size === 'large'"
+            [class.variant-default]="variant === 'default'"
+            [class.variant-primary]="variant === 'primary'"
+            [class.variant-success]="variant === 'success'"
+            [class.variant-warning]="variant === 'warning'"
+            [class.variant-danger]="variant === 'danger'">
+        <svg 
+          *ngIf="value && !indeterminate" 
+          class="checkmark"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" 
+            fill="currentColor"/>
+        </svg>
+        <svg 
+          *ngIf="indeterminate" 
+          class="indeterminate-mark"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M19 13H5v-2h14v2z" 
+            fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="checkbox-text" *ngIf="label">{{ label }}</span>
+    </label>
+  </div>
+</div>

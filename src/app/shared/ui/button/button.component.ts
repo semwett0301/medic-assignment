@@ -1,0 +1,94 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-button',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <button 
+      [class]="buttonClass"
+      [disabled]="disabled"
+      (click)="onClick.emit($event)"
+      [type]="type">
+      <ng-content></ng-content>
+    </button>
+  `,
+  styles: [`
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: #006175;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: #004d5c;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: #5a6268;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background-color: #c82333;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover:not(:disabled) {
+      background-color: #218838;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid #006175;
+      color: #006175;
+    }
+
+    .btn-outline:hover:not(:disabled) {
+      background-color: #006175;
+      color: white;
+    }
+  `]
+})
+export class ButtonComponent {
+  @Input() variant: 'primary' | 'secondary' | 'danger' | 'success' | 'outline' = 'primary';
+  @Input() disabled = false;
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Output() onClick = new EventEmitter<Event>();
+
+  get buttonClass(): string {
+    return `btn-${this.variant}`;
+  }
+}

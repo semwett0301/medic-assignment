@@ -1,0 +1,84 @@
+<app-card>
+  <div class="create-section">
+    <div class="section-header">
+      <h2>Add New Client</h2>
+      <app-button 
+        variant="primary" 
+        (onClick)="onToggleForm()"
+        [disabled]="loading">
+        {{ showForm ? 'Cancel' : '+ Add Client' }}
+      </app-button>
+    </div>
+
+    <!-- Create Form -->
+    <form 
+      *ngIf="showForm" 
+      [formGroup]="form" 
+      (ngSubmit)="onSubmitForm()"
+      class="create-form">
+      <div class="form-row">
+        <div class="form-group">
+          <app-input
+            id="firstName"
+            label="First Name"
+            placeholder="Enter first name"
+            [value]="form.get('firstName')?.value || ''"
+            [errorMessage]="getFieldError('firstName')"
+            (valueChange)="form.patchValue({firstName: $event})"
+            [required]="true">
+          </app-input>
+        </div>
+        <div class="form-group">
+          <app-input
+            id="lastName"
+            label="Last Name"
+            placeholder="Enter last name"
+            [value]="form.get('lastName')?.value || ''"
+            [errorMessage]="getFieldError('lastName')"
+            (valueChange)="form.patchValue({lastName: $event})"
+            [required]="true">
+          </app-input>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <app-input
+            id="birthdate"
+            type="date"
+            label="Birth Date"
+            [value]="form.get('birthdate')?.value || ''"
+            [errorMessage]="getFieldError('birthdate')"
+            (valueChange)="form.patchValue({birthdate: $event})"
+            [required]="true"
+            [max]="maxDate">
+          </app-input>
+        </div>
+        <div class="form-group">
+          <app-checkbox
+            id="isActive"
+            label="Active Client"
+            formControlName="isActive"
+            variant="success"
+            size="medium">
+          </app-checkbox>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <app-button 
+          type="submit" 
+          variant="success"
+          [disabled]="form.invalid || loading">
+          Create
+        </app-button>
+        <app-button 
+          type="button" 
+          variant="secondary"
+          (onClick)="onResetForm()">
+          Reset
+        </app-button>
+      </div>
+    </form>
+  </div>
+</app-card>

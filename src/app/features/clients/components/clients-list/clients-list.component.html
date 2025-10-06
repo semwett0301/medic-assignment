@@ -1,0 +1,49 @@
+<app-card>
+  <div class="clients-section">
+    <div class="section-header">
+      <h2>Clients List</h2>
+      <div class="clients-count">
+        Showing {{ clients.length }} clients
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading clients...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-state">
+      <p class="error-message">{{ error }}</p>
+      <app-button variant="primary" (onClick)="onRetry()">
+        Retry
+      </app-button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!loading && !error && clients.length === 0" class="empty-state">
+      <div class="empty-icon">👥</div>
+      <h3>No clients found</h3>
+      <p>Get started by adding your first client</p>
+    </div>
+
+    <!-- Clients Grid -->
+    <div *ngIf="!loading && !error && clients.length > 0" class="clients-grid">
+      <app-client-card
+        *ngFor="let client of clients; trackBy: trackByClientId"
+        [client]="client"
+        [isEditing]="editingClientId === client.id"
+        [editForm]="editForm"
+        [loading]="loading"
+        [getFieldError]="getEditFieldError"
+        [formatDate]="formatDate"
+        [calculateAge]="calculateAge"
+        (startEdit)="onStartEdit($event)"
+        (saveEdit)="onSaveEdit($event)"
+        (cancelEdit)="onCancelEdit()"
+        (deleteClient)="onDeleteClient($event)">
+      </app-client-card>
+    </div>
+  </div>
+</app-card>
