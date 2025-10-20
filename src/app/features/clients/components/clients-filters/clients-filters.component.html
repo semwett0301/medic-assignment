@@ -7,8 +7,8 @@
           id="search"
           label="Search Clients"
           placeholder="Search by first or last name..."
-          [value]="searchTerm"
-          (valueChange)="onSearchChange($event)">
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)">
         </app-input>
       </div>
       <div class="filter-group">
@@ -17,10 +17,7 @@
           name="statusFilter"
           [options]="statusFilterOptions"
           [ngModel]="activeFilter"
-          (valueChange)="onFilterChange($event)"
-          variant="primary"
-          size="medium"
-          layout="horizontal">
+          (valueChange)="onFilterChange($event)">
         </app-radio>
       </div>
     </div>

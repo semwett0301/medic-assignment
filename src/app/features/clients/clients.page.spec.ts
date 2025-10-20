@@ -1,15 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of, throwError } from 'rxjs';
-import { ClientsPageComponent } from './clients.page';
-import { ClientsService } from './clients.service';
-import { Client, CreateClientRequest, UpdateClientRequest } from './client.model';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {of} from 'rxjs';
+import {ClientsPageComponent} from './clients.page';
+import {ClientsService} from './clients.service';
+import {Client, CreateClientRequest, UpdateClientRequest} from './client.model';
 
 describe('ClientsPageComponent', () => {
-  let component: ClientsPageComponent;
+    let component: ClientsPageComponent;
   let fixture: ComponentFixture<ClientsPageComponent>;
-  let clientsService: jasmine.SpyObj<ClientsService>;
+  let clientsService: jest.Mocked<ClientsService>;
 
   const mockClients: Client[] = [
     {
@@ -45,7 +44,7 @@ describe('ClientsPageComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [ClientsPageComponent, ReactiveFormsModule, HttpClientTestingModule],
+      imports: [ClientsPageComponent, ReactiveFormsModule],
       providers: [
         FormBuilder,
         { provide: ClientsService, useValue: clientsServiceSpy }

@@ -8,11 +8,11 @@
       "id": "2"
     },
     {
-      "id": "3",
-      "firstName": "First3",
+      "firstName": "вфыFirst3",
       "lastName": "Last3",
-      "birthdate": "1968-12-03T00:00:00.000Z",
-      "isActive": true
+      "birthdate": "1968-12-03",
+      "isActive": true,
+      "id": "3"
     },
     {
       "id": "4",
@@ -48,13 +48,6 @@
       "lastName": "Last8",
       "birthdate": "2005-01-03T00:00:00.000Z",
       "isActive": false
-    },
-    {
-      "id": "d1f9",
-      "firstName": "Semen",
-      "lastName": "Mokrov",
-      "birthdate": "2002-01-03",
-      "isActive": true
     },
     {
       "id": "4503",

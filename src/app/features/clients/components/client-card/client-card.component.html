@@ -42,9 +42,8 @@
           <app-input
             id="editFirstName"
             label="First Name"
-            [value]="editForm.get('firstName')?.value || ''"
+            formControlName="firstName"
             [errorMessage]="getFieldError('firstName')"
-            (valueChange)="editForm.patchValue({firstName: $event})"
             [required]="true">
           </app-input>
         </div>
@@ -52,9 +51,8 @@
           <app-input
             id="editLastName"
             label="Last Name"
-            [value]="editForm.get('lastName')?.value || ''"
+            formControlName="lastName"
             [errorMessage]="getFieldError('lastName')"
-            (valueChange)="editForm.patchValue({lastName: $event})"
             [required]="true">
           </app-input>
         </div>
@@ -66,9 +64,8 @@
             id="editBirthdate"
             type="date"
             label="Birth Date"
-            [value]="editForm.get('birthdate')?.value || ''"
+            formControlName="birthdate"
             [errorMessage]="getFieldError('birthdate')"
-            (valueChange)="editForm.patchValue({birthdate: $event})"
             [required]="true"
             [max]="maxDate">
           </app-input>

@@ -3,9 +3,7 @@ import { Observable, BehaviorSubject, map, tap } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
 import { Client, CreateClientRequest, UpdateClientRequest } from './client.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: null })
 export class ClientsService {
   // Signals for reactive state management
   private clientsSignal = signal<Client[]>([]);
@@ -16,10 +14,6 @@ export class ClientsService {
   clients = computed(() => this.clientsSignal());
   loading = computed(() => this.loadingSignal());
   error = computed(() => this.errorSignal());
-
-  // BehaviorSubjects for filtering and searching
-  private searchTermSubject = new BehaviorSubject<string>('');
-  private activeFilterSubject = new BehaviorSubject<boolean | null>(null);
 
   // Signals for search and filter
   searchTermSignal = signal<string>('');
@@ -129,12 +123,10 @@ export class ClientsService {
   // Search functionality
   setSearchTerm(term: string): void {
     this.searchTermSignal.set(term);
-    this.searchTermSubject.next(term);
   }
 
   // Filter functionality
   setActiveFilter(isActive: boolean | null): void {
     this.activeFilterSignal.set(isActive);
-    this.activeFilterSubject.next(isActive);
   }
 }

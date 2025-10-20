@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ClientsService } from './clients.service';
 import { ApiService } from '../../core/services/api.service';
 import { Client, CreateClientRequest, UpdateClientRequest } from './client.model';
+import { of, throwError } from 'rxjs';
 
 describe('ClientsService', () => {
   let service: ClientsService;
-  let httpMock: HttpTestingController;
+  let apiServiceMock: jest.Mocked<ApiService>;
 
   const mockClients: Client[] = [
     {
@@ -33,16 +33,20 @@ describe('ClientsService', () => {
   ];
 
   beforeEach(() => {
+    apiServiceMock = {
+      getClients: jest.fn(),
+      createClient: jest.fn(),
+      updateClient: jest.fn(),
+      deleteClient: jest.fn()
+    } as unknown as jest.Mocked<ApiService>;
+
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ClientsService, ApiService]
+      providers: [
+        ClientsService,
+        { provide: ApiService, useValue: apiServiceMock }
+      ]
     });
     service = TestBed.inject(ClientsService);
-    httpMock = TestBed.inject(HttpTestingController);
-  });
-
-  afterEach(() => {
-    httpMock.verify();
   });
 
   describe('Initial State', () => {
@@ -62,23 +66,24 @@ describe('ClientsService', () => {
 
   describe('loadClients', () => {
     it('should load clients successfully', () => {
+      apiServiceMock.getClients.mockReturnValue(of(mockClients));
+
       service.loadClients().subscribe();
 
-      const req = httpMock.expectOne('http://localhost:3000/clients');
-      expect(req.request.method).toBe('GET');
-      req.flush(mockClients);
-
+      expect(apiServiceMock.getClients).toHaveBeenCalled();
       expect(service.clients()).toEqual(mockClients);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe(null);
     });
 
     it('should handle load clients error', () => {
-      service.loadClients().subscribe();
+      apiServiceMock.getClients.mockReturnValue(throwError(() => new Error('Server Error')));
 
-      const req = httpMock.expectOne('http://localhost:3000/clients');
-      req.flush('Error', { status: 500, statusText: 'Server Error' });
+      service.loadClients().subscribe({
+        error: () => {}
+      });
 
+      expect(apiServiceMock.getClients).toHaveBeenCalled();
       expect(service.clients()).toEqual([]);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe('Failed to load clients');
@@ -99,13 +104,11 @@ describe('ClientsService', () => {
         ...newClient
       };
 
+      apiServiceMock.createClient.mockReturnValue(of(createdClient));
+
       service.createClient(newClient).subscribe();
 
-      const req = httpMock.expectOne('http://localhost:3000/clients');
-      expect(req.request.method).toBe('POST');
-      expect(req.request.body).toEqual(newClient);
-      req.flush(createdClient);
-
+      expect(apiServiceMock.createClient).toHaveBeenCalledWith(newClient);
       expect(service.clients()).toContain(createdClient);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe(null);
@@ -119,11 +122,13 @@ describe('ClientsService', () => {
         isActive: true
       };
 
-      service.createClient(newClient).subscribe();
+      apiServiceMock.createClient.mockReturnValue(throwError(() => new Error('Bad Request')));
 
-      const req = httpMock.expectOne('http://localhost:3000/clients');
-      req.flush('Error', { status: 400, statusText: 'Bad Request' });
+      service.createClient(newClient).subscribe({
+        error: () => {}
+      });
 
+      expect(apiServiceMock.createClient).toHaveBeenCalledWith(newClient);
       expect(service.clients()).toEqual([]);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe('Failed to create client');
@@ -148,13 +153,11 @@ describe('ClientsService', () => {
         ...updateData
       };
 
+      apiServiceMock.updateClient.mockReturnValue(of(updatedClient));
+
       service.updateClient('1', updateData).subscribe();
 
-      const req = httpMock.expectOne('http://localhost:3000/clients/1');
-      expect(req.request.method).toBe('PUT');
-      expect(req.request.body).toEqual(updateData);
-      req.flush(updatedClient);
-
+      expect(apiServiceMock.updateClient).toHaveBeenCalledWith('1', updateData);
       const updatedClients = service.clients();
       const updatedClientInList = updatedClients.find(c => c.id === '1');
       expect(updatedClientInList).toEqual(updatedClient);
@@ -170,11 +173,13 @@ describe('ClientsService', () => {
         isActive: false
       };
 
-      service.updateClient('1', updateData).subscribe();
+      apiServiceMock.updateClient.mockReturnValue(throwError(() => new Error('Not Found')));
 
-      const req = httpMock.expectOne('http://localhost:3000/clients/1');
-      req.flush('Error', { status: 404, statusText: 'Not Found' });
+      service.updateClient('1', updateData).subscribe({
+        error: () => {}
+      });
 
+      expect(apiServiceMock.updateClient).toHaveBeenCalledWith('1', updateData);
       expect(service.clients()).toEqual(mockClients);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe('Failed to update client');
@@ -187,12 +192,11 @@ describe('ClientsService', () => {
     });
 
     it('should delete client successfully', () => {
+      apiServiceMock.deleteClient.mockReturnValue(of(void 0));
+
       service.deleteClient('1').subscribe();
 
-      const req = httpMock.expectOne('http://localhost:3000/clients/1');
-      expect(req.request.method).toBe('DELETE');
-      req.flush({});
-
+      expect(apiServiceMock.deleteClient).toHaveBeenCalledWith('1');
       const remainingClients = service.clients();
       expect(remainingClients).not.toContain(mockClients[0]);
       expect(remainingClients).toHaveLength(2);
@@ -201,11 +205,13 @@ describe('ClientsService', () => {
     });
 
     it('should handle delete client error', () => {
-      service.deleteClient('1').subscribe();
+      apiServiceMock.deleteClient.mockReturnValue(throwError(() => new Error('Not Found')));
 
-      const req = httpMock.expectOne('http://localhost:3000/clients/1');
-      req.flush('Error', { status: 404, statusText: 'Not Found' });
+      service.deleteClient('1').subscribe({
+        error: () => {}
+      });
 
+      expect(apiServiceMock.deleteClient).toHaveBeenCalledWith('1');
       expect(service.clients()).toEqual(mockClients);
       expect(service.loading()).toBe(false);
       expect(service.error()).toBe('Failed to delete client');

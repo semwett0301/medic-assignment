@@ -1,0 +1,18 @@
+<div class="input-group">
+  <label *ngIf="label" [for]="id" class="input-label">{{ label }}</label>
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    [required]="required"
+    [min]="min"
+    [max]="max"
+    [class.error]="hasError"
+    (input)="onInput($event)"
+    (blur)="onBlurEvent($event)"
+    (focus)="onFocusEvent($event)"
+  />
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

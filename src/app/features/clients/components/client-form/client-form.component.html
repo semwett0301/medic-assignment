@@ -22,9 +22,8 @@
             id="firstName"
             label="First Name"
             placeholder="Enter first name"
-            [value]="form.get('firstName')?.value || ''"
+            formControlName="firstName"
             [errorMessage]="getFieldError('firstName')"
-            (valueChange)="form.patchValue({firstName: $event})"
             [required]="true">
           </app-input>
         </div>
@@ -33,9 +32,8 @@
             id="lastName"
             label="Last Name"
             placeholder="Enter last name"
-            [value]="form.get('lastName')?.value || ''"
+            formControlName="lastName"
             [errorMessage]="getFieldError('lastName')"
-            (valueChange)="form.patchValue({lastName: $event})"
             [required]="true">
           </app-input>
         </div>
@@ -47,9 +45,8 @@
             id="birthdate"
             type="date"
             label="Birth Date"
-            [value]="form.get('birthdate')?.value || ''"
+            formControlName="birthdate"
             [errorMessage]="getFieldError('birthdate')"
-            (valueChange)="form.patchValue({birthdate: $event})"
             [required]="true"
             [max]="maxDate">
           </app-input>

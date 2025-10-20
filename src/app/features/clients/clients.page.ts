@@ -1,13 +1,12 @@
-import {Component, OnInit, signal, computed, Signal, effect} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClientsService } from './clients.service';
-import { Client, CreateClientRequest, UpdateClientRequest } from './client.model';
-import { ClientsFiltersComponent } from './components/clients-filters/clients-filters.component';
-import { ClientsListComponent } from './components/clients-list/clients-list.component';
-import { ClientFormComponent } from './components/client-form/client-form.component';
-import { pastDateValidator, minimumAgeValidator } from '../../shared/validators/date.validator';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {Component, computed, OnInit, signal, Signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ClientsService} from './clients.service';
+import {Client, CreateClientRequest, UpdateClientRequest} from './client.model';
+import {ClientsFiltersComponent} from './components/clients-filters/clients-filters.component';
+import {ClientsListComponent} from './components/clients-list/clients-list.component';
+import {ClientFormComponent} from './components/client-form/client-form.component';
+import {minimumAgeValidator, pastDateValidator} from '../../shared/validators';
 
 @Component({
   selector: 'app-clients-page',

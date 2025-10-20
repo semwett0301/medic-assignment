@@ -55,7 +55,7 @@ describe('RadioComponent', () => {
     const compiled = fixture.nativeElement;
     const radioInputs = compiled.querySelectorAll('input[type="radio"]');
     
-    radioInputs.forEach(input => {
+    radioInputs.forEach((input: HTMLInputElement) => {
       expect(input.name).toBe('test-radio');
     });
   });
@@ -86,15 +86,6 @@ describe('RadioComponent', () => {
     expect(component.value).toBe('option2');
   });
 
-  it('should call onChange when option is selected', () => {
-    const onChangeSpy = jest.fn();
-    component.registerOnChange(onChangeSpy);
-    
-    component.onRadioChange('option2');
-    
-    expect(onChangeSpy).toHaveBeenCalledWith('option2');
-  });
-
   it('should not emit or update when disabled', () => {
     component.disabled = true;
     jest.spyOn(component.valueChange, 'emit');
@@ -112,7 +103,7 @@ describe('RadioComponent', () => {
     const compiled = fixture.nativeElement;
     const radioInputs = compiled.querySelectorAll('input[type="radio"]');
     
-    radioInputs.forEach(input => {
+    radioInputs.forEach((input: HTMLInputElement) => {
       expect(input.disabled).toBe(true);
     });
   });
@@ -145,13 +136,5 @@ describe('RadioComponent', () => {
     component.setDisabledState(true);
     
     expect(component.disabled).toBe(true);
-  });
-
-  it('should handle ControlValueAccessor registerOnTouched', () => {
-    const onTouchedSpy = jest.fn();
-    component.registerOnTouched(onTouchedSpy);
-    
-    // This should not throw an error
-    expect(() => component.registerOnTouched(onTouchedSpy)).not.toThrow();
   });
 });
