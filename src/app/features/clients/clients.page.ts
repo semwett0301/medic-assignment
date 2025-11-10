@@ -206,17 +206,6 @@ export class ClientsPageComponent implements OnInit {
     return '';
   }
 
-  getEditFieldError(fieldName: string): string {
-    const field = this.editForm.get(fieldName);
-    if (field?.errors && field.touched) {
-      if (field.errors['required']) return `${this.getFieldLabel(fieldName)} is required`;
-      if (field.errors['minlength']) return `${this.getFieldLabel(fieldName)} must be at least 2 characters`;
-      if (field.errors['pastDate']) return field.errors['pastDate'].message;
-      if (field.errors['minimumAge']) return field.errors['minimumAge'].message;
-    }
-    return '';
-  }
-
   private getFieldLabel(fieldName: string): string {
     const labels: { [key: string]: string } = {
       firstName: 'First Name',
